@@ -19,6 +19,10 @@ clean:
 black:
 	black --skip-string-normalization rating_api *.py
 
+.PHONY: black-check
+black-check:
+	black --check --skip-string-normalization rating_api *.py
+
 .PHONY: flake8
 flake8:
 	flake8 --ignore=E501,E402,W503 rating_api *.py
@@ -36,7 +40,7 @@ pycodestyle:
 	pycodestyle --ignore=E501,W503,E402,E701 rating_api *.py
 
 .PHONY: check
-check: black flake8 mypy pylint pycodestyle
+check: black-check flake8 mypy pylint pycodestyle
 
 .PHONY: test
 test:

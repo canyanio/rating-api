@@ -1,0 +1,75 @@
+image: python:3.8-alpine3.10
+
+stages:
+  - test
+  - build
+  - publish
+
+before_script:
+  - export DOCKER_REPOSITORY="canyan/rating-api"
+  - export DOCKER_TAG=${CI_COMMIT_REF_SLUG:-master}
+  - export SERVICE_IMAGE=$DOCKER_REPOSITORY:$DOCKER_TAG
+  - export COMMIT_TAG="$CI_COMMIT_REF_SLUG"_"$CI_COMMIT_SHA"
+
+test:unit:
+  stage: test
+  services:
+    - mongo:4.0
+  script:
+    - apk add build-base gcc python3-dev musl-dev libffi-dev libstdc++ make
+    - pip3 install -r requirements.txt
+    - export MONGODB_URI="mongodb://mongo"
+    - make check
+    - make coverage
+    - mkdir -p tests/unit-coverage && find . -name 'coverage.xml' -exec cp --parents {} ./tests/unit-coverage \;
+    - tar -cvf $CI_PROJECT_DIR/unit-coverage.tar tests/unit-coverage
+  artifacts:
+    expire_in: 2w
+    paths:
+      - unit-coverage.tar
+
+build:
+  image: docker
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - echo "building rating-api for ${SERVICE_IMAGE}"
+    - docker build -t $SERVICE_IMAGE .
+    - docker save $SERVICE_IMAGE > image.tar
+  artifacts:
+    expire_in: 2w
+    paths:
+      - image.tar
+  tags:
+    - docker
+
+publish:tests:
+  image: alpine
+  stage: publish
+  before_script:
+    - apk add --no-cache bash curl findutils git
+  dependencies:
+    - test:unit
+  script:
+    - tar -xvf unit-coverage.tar
+    - bash -c "bash <(curl -s https://codecov.io/bash) -Z -s ./tests/unit-coverage"
+
+publish:build:
+  image: docker
+  stage: publish
+  services:
+    - docker:dind
+  dependencies:
+    - build
+  script:
+    - docker load -i image.tar
+    - docker tag $SERVICE_IMAGE $DOCKER_REPOSITORY:$COMMIT_TAG
+    - docker tag $SERVICE_IMAGE $DOCKER_REPOSITORY:$CI_COMMIT_REF_SLUG
+    - echo -n $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
+    - docker push $DOCKER_REPOSITORY:$COMMIT_TAG
+    - docker push $SERVICE_IMAGE
+  only:
+    - /^(master|[0-9]+\.[0-9]+\.x)$/
+  tags:
+    - docker
