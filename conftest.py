@@ -1,8 +1,9 @@
 import asyncio
+import os
 import pytest
 
-MONGODB_URI = "mongodb://localhost:27017"
-MONGODB_DB = "rating_api_tests"
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
+MONGODB_DB = os.getenv("MONGODB_DB", "rating_api_tests")
 
 
 def run_synchronously(coroutine):
