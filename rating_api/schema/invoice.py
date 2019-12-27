@@ -15,7 +15,6 @@ class InvoiceFilter(graphene.InputObjectType):
     q = graphene.String()
     id = graphene.ID()
     ids = graphene.List(graphene.ID)
-    ids = graphene.List(graphene.ID)
     tenant = graphene.ID(default_value='default')
     invoice_number = graphene.String()
     invoice_date = graphene.Date()
