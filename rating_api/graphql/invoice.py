@@ -8,7 +8,7 @@ from graphene.types.resolver import dict_resolver  # type: ignore
 from .customer import Customer
 from ..services import invoice as invoice_service
 from ..services import storage as storage_service
-from ..types import BigInt
+from .types import BigInt
 
 
 class InvoiceFilter(graphene.InputObjectType):

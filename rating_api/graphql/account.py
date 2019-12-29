@@ -13,7 +13,7 @@ from .pricelist_rate import (
 )
 from ..services import account as account_service
 from ..services import storage as storage_service
-from ..types import BigInt
+from .types import BigInt
 
 
 class AccountType(graphene.Enum):
