@@ -73,6 +73,7 @@ make api
 
 * Follow us on [Twitter](https://twitter.com/canyan_io). Please
   feel free to tweet us questions.
+* Connect with us on [LinkedIN](https://www.linkedin.com/company/canyan/).
 * Join us on [Slack](https://join.slack.com/t/canyanio/shared_invite/enQtODIyODY5MDIyMTMxLTExYjkwZmFkMjBiZWI3ZDEyZjYzYjE2N2M2NWRkZGUwYjdhZmE0YjRkNTQ1MGFmMGJmZjczYzkzYzk0ZWZiMzY)
 * Fork us on [Github](https://github.com/canyanio)
 * Email us at [info@canyan.io](mailto:info@canyan.io)
