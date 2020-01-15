@@ -540,6 +540,7 @@ def test_api_upsert_account(app, client):
 mutation {
     upsertAccount(
         id: "469f8e15-f0a2-4f7f-92eb-c52d2d491b24",
+        type: PREPAID,
         balance: 200
     ) {
         id
@@ -620,7 +621,8 @@ def test_api_upsert_account_by_tag(app, client):
 mutation {
     upsertAccount(
         tenant: "default",
-        account_tag: "1000"
+        account_tag: "1000",
+        type: PREPAID,
         balance: 200
     ) {
         id
@@ -703,7 +705,8 @@ def test_api_upsert_account_by_tag_without_tag(app, client):
             "query": """
 mutation {
     upsertAccount(
-        tenant: "default"
+        tenant: "default",
+        type: PREPAID,
         balance: 200
     ) {
         id

@@ -187,7 +187,7 @@ class upsertAccount(graphene.Mutation):
         tenant = graphene.ID(default_value='default')
         account_tag = graphene.String()
         name = graphene.String()
-        type = AccountType()
+        type = AccountType(required=True)
         customer_tag = graphene.String()
         notification_email = graphene.String()
         notification_mobile = graphene.String()
