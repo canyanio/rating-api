@@ -39,7 +39,6 @@ def main(
         host=config["host"],
         port=config["port"],
         log_level=log_level,
-        reload=config["debug"],
     )
 
 
