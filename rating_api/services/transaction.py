@@ -62,6 +62,7 @@ async def serialize(storage: StorageService, transaction: dict) -> dict:
         "timestamp_auth": transaction.get("timestamp_auth"),
         "timestamp_begin": transaction.get("timestamp_begin"),
         "timestamp_end": transaction.get("timestamp_end"),
+        "primary": transaction.get("primary"),
         "inbound": transaction.get("inbound"),
         "duration": transaction.get("duration"),
         "fee": transaction.get("fee"),
@@ -120,6 +121,10 @@ async def get_query(storage: StorageService, filter: Optional[dict] = None) -> d
         filters_and.append({"account_tag": filter["account_tag"]})
     if filter.get("invoice_number"):
         filters_and.append({"invoice_number": filter["invoice_number"]})
+    if filter.get("primary") is not None:
+        filters_and.append({"primary": bool(filter["primary"])})
+    if filter.get("inbound") is not None:
+        filters_and.append({"inbound": bool(filter["inbound"])})
     return {"$and": filters_and} if filters_and else {}
 
 
@@ -180,6 +185,7 @@ async def upsert(storage: StorageService, transaction: dict) -> Optional[dict]:
                     "source_ip": transaction.get("source_ip"),
                     "carrier_ip": transaction.get("carrier_ip"),
                     "destination": transaction.get("destination"),
+                    "primary": bool(transaction.get("primary")),
                     "inbound": bool(transaction.get("inbound")),
                     "tags": transaction.get("tags"),
                     "authorized": transaction.get("authorized"),
