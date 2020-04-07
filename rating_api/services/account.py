@@ -231,6 +231,7 @@ async def get_transaction(
             "tags": transaction.get("tags"),
             "in_progress": transaction.get("in_progress"),
             "inbound": transaction.get("inbound"),
+            "primary": transaction.get("primary"),
             "timestamp_begin": transaction.get("timestamp_begin"),
             "timestamp_end": transaction.get("timestamp_end"),
         }
@@ -339,6 +340,7 @@ async def begin_transaction(
                     "tags": transaction.get("tags"),
                     "in_progress": True,
                     "inbound": bool(transaction.get("inbound")),
+                    "primary": bool(transaction.get("primary")),
                     "timestamp_begin": transaction.get("timestamp_begin"),
                     "timestamp_end": None,
                 }

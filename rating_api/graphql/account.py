@@ -62,6 +62,7 @@ class AccountTransaction(graphene.ObjectType):
     destination_rate = graphene.Field(PricelistRate)
     in_progress = graphene.Boolean()
     inbound = graphene.Boolean()
+    primary = graphene.Boolean()
     timestamp_begin = graphene.DateTime()
     timestamp_end = graphene.DateTime()
 
@@ -89,6 +90,7 @@ class InputAccountTransaction(graphene.InputObjectType):
     tags = graphene.List(graphene.String)
     destination_rate = graphene.Field(InputAccountPricelistRate)
     inbound = graphene.Boolean()
+    primary = graphene.Boolean()
     timestamp_begin = graphene.DateTime(required=True)
     timestamp_end = graphene.DateTime()
 
@@ -339,6 +341,7 @@ class beginAccountTransaction(graphene.Mutation):
                 "destination": transaction.destination,
                 "carrier_ip": transaction.carrier_ip,
                 "inbound": transaction.inbound,
+                "primary": transaction.primary,
                 "tags": transaction.tags,
                 "timestamp_begin": transaction.timestamp_begin,
             },

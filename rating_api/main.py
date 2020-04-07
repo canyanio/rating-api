@@ -35,10 +35,7 @@ def main(
     app = get_app(config)
     log_level = "info" if not config["debug"] else "debug"
     uvicorn.run(
-        app,
-        host=config["host"],
-        port=config["port"],
-        log_level=log_level,
+        app, host=config["host"], port=config["port"], log_level=log_level,
     )
 
 
