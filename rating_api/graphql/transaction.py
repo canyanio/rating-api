@@ -20,6 +20,8 @@ class TransactionFilter(graphene.InputObjectType):
     transaction_tag = graphene.String()
     account_tag = graphene.String()
     invoice_number = graphene.String()
+    primary = graphene.Boolean()
+    inbound = graphene.Boolean()
 
     def to_dict(self):
         return {
@@ -30,6 +32,8 @@ class TransactionFilter(graphene.InputObjectType):
             "transaction_tag": self.transaction_tag,
             "account_tag": self.account_tag,
             "invoice_number": self.invoice_number,
+            "primary": self.primary,
+            "inbound": self.inbound,
         }
 
 
@@ -53,6 +57,7 @@ class Transaction(graphene.ObjectType):
     timestamp_auth = graphene.DateTime()
     timestamp_begin = graphene.DateTime()
     timestamp_end = graphene.DateTime()
+    primary = graphene.Boolean()
     inbound = graphene.Boolean()
     failed = graphene.Boolean()
     failed_reason = graphene.String()
@@ -77,6 +82,7 @@ class upsertTransaction(graphene.Mutation):
         timestamp_auth = graphene.DateTime()
         timestamp_begin = graphene.DateTime()
         timestamp_end = graphene.DateTime()
+        primary = graphene.Boolean()
         inbound = graphene.Boolean()
         failed = graphene.Boolean()
         failed_reason = graphene.String()
@@ -111,6 +117,7 @@ class upsertTransaction(graphene.Mutation):
         failed_reason: Optional[str] = None,
         duration: int = None,
         fee: int = None,
+        primary: bool = None,
     ):
         if id is None and not (
             tenant is not None
@@ -139,6 +146,7 @@ class upsertTransaction(graphene.Mutation):
                 timestamp_auth=timestamp_auth,
                 timestamp_begin=timestamp_begin,
                 timestamp_end=timestamp_end,
+                primary=primary,
                 inbound=inbound,
                 failed=failed,
                 failed_reason=failed_reason,

@@ -63,4 +63,4 @@ api-dev:
 
 .PHONY: dockerfile
 dockerfile:
-	docker build -t canyan/rating-api:latest .
+	docker build -t canyan/rating-api:master .

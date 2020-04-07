@@ -287,6 +287,8 @@ def test_api_get_list_of_transactions(app, client):
             "transaction_tag": "100",
             "account_tag": "1000",
             "invoice_number": "2019/001",
+            "inbound": True,
+            "primary": True,
         }
     )
     #
@@ -311,7 +313,9 @@ query {
             transaction_tag: "100",
             account_tag: "1000",
             invoice_number: "2019/001",
-            q: "1000"
+            q: "1000",
+            inbound: true,
+            primary: true
         }) {
         count
     }
