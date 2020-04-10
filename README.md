@@ -46,12 +46,6 @@ docker-compose up -d
 If you're not familiar with docker-compose read [the documentation](https://docs.docker.com/compose/) on the official docker website.
 You can also install and run MondoDB and RabbitMQ as local services.
 
-### Running with the docker image
-The Rating API is available at [docker hub](https://hub.docker.com/repository/docker/canyan/rating-api) and can be easily run with the following command:
-```
-docker run -d -p 8000:8000 canyan/rating-api:master rating-api -h 0.0.0.0 -p 8000
-```
-
 ### Running from source
 If you want to run the API locally you need to create a Python3 virtual environment with:
 ```
