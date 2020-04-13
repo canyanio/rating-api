@@ -53,14 +53,13 @@ class Transaction(graphene.ObjectType):
     carrier_ip = graphene.String()
     tags = graphene.List(graphene.String)
     authorized = graphene.Boolean()
+    unauthorized_reason = graphene.String()
     destination_rate = graphene.Field(PricelistRate)
     timestamp_auth = graphene.DateTime()
     timestamp_begin = graphene.DateTime()
     timestamp_end = graphene.DateTime()
     primary = graphene.Boolean()
     inbound = graphene.Boolean()
-    failed = graphene.Boolean()
-    failed_reason = graphene.String()
     duration = graphene.Int()
     fee = graphene.Int()
 
@@ -78,14 +77,13 @@ class upsertTransaction(graphene.Mutation):
         carrier_ip = graphene.String()
         tags = graphene.List(graphene.String)
         authorized = graphene.Boolean()
+        unauthorized_reason = graphene.String()
         destination_rate = graphene.Argument(InputAccountPricelistRate)
         timestamp_auth = graphene.DateTime()
         timestamp_begin = graphene.DateTime()
         timestamp_end = graphene.DateTime()
         primary = graphene.Boolean()
         inbound = graphene.Boolean()
-        failed = graphene.Boolean()
-        failed_reason = graphene.String()
         duration = graphene.Int()
         fee = graphene.Int()
 
@@ -108,13 +106,12 @@ class upsertTransaction(graphene.Mutation):
         carrier_ip: Optional[str] = None,
         tags: List[str] = None,
         authorized: bool = None,
+        unauthorized_reason: Optional[str] = None,
         destination_rate: Optional[str] = None,
         timestamp_auth: datetime = None,
         timestamp_begin: datetime = None,
         timestamp_end: datetime = None,
         inbound: bool = None,
-        failed: bool = None,
-        failed_reason: Optional[str] = None,
         duration: int = None,
         fee: int = None,
         primary: bool = None,
@@ -142,14 +139,13 @@ class upsertTransaction(graphene.Mutation):
                 carrier_ip=carrier_ip,
                 tags=tags,
                 authorized=authorized,
+                unauthorized_reason=unauthorized_reason,
                 destination_rate=destination_rate,
                 timestamp_auth=timestamp_auth,
                 timestamp_begin=timestamp_begin,
                 timestamp_end=timestamp_end,
                 primary=primary,
                 inbound=inbound,
-                failed=failed,
-                failed_reason=failed_reason,
                 duration=duration,
                 fee=fee,
             ),

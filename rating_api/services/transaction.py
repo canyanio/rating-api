@@ -59,6 +59,7 @@ async def serialize(storage: StorageService, transaction: dict) -> dict:
         "destination_rate": transaction.get("destination_rate"),
         "tags": transaction.get("tags"),
         "authorized": transaction.get("authorized"),
+        "unauthorized_reason": transaction.get("unauthorized_reason"),
         "timestamp_auth": transaction.get("timestamp_auth"),
         "timestamp_begin": transaction.get("timestamp_begin"),
         "timestamp_end": transaction.get("timestamp_end"),
@@ -66,8 +67,6 @@ async def serialize(storage: StorageService, transaction: dict) -> dict:
         "inbound": transaction.get("inbound"),
         "duration": transaction.get("duration"),
         "fee": transaction.get("fee"),
-        "failed": transaction.get("failed"),
-        "failed_reason": transaction.get("failed_reason"),
     }
 
 
@@ -189,14 +188,13 @@ async def upsert(storage: StorageService, transaction: dict) -> Optional[dict]:
                     "inbound": bool(transaction.get("inbound")),
                     "tags": transaction.get("tags"),
                     "authorized": transaction.get("authorized"),
+                    "unauthorized_reason": transaction.get("unauthorized_reason"),
                     "destination_rate": transaction.get("destination_rate"),
                     "timestamp_auth": transaction.get("timestamp_auth"),
                     "timestamp_begin": transaction.get("timestamp_begin"),
                     "timestamp_end": transaction.get("timestamp_end"),
                     "duration": transaction.get("duration"),
                     "fee": transaction.get("fee"),
-                    "failed": transaction.get("failed"),
-                    "failed_reason": transaction.get("failed_reason"),
                 }
             ),
         },
