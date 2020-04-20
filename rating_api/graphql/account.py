@@ -111,6 +111,8 @@ class LinkedAccount(graphene.ObjectType):
     active = graphene.Boolean(default_value=True)
     balance = BigInt()
     max_concurrent_transactions = graphene.Int()
+    max_inbound_transactions = graphene.Int()
+    max_outbound_transactions = graphene.Int()
     running_transactions = graphene.List(AccountTransaction)
     carrier_tags = graphene.List(graphene.String)
     carrier_tags_override = graphene.List(graphene.String)
@@ -148,6 +150,8 @@ class Account(graphene.ObjectType):
     active = graphene.Boolean(default_value=True)
     balance = BigInt()
     max_concurrent_transactions = graphene.Int()
+    max_inbound_transactions = graphene.Int()
+    max_outbound_transactions = graphene.Int()
     running_transactions = graphene.List(AccountTransaction)
     carrier_tags = graphene.List(graphene.String)
     carrier_tags_override = graphene.List(graphene.String)
@@ -196,6 +200,8 @@ class upsertAccount(graphene.Mutation):
         active = graphene.Boolean(default_value=True)
         balance = BigInt()
         max_concurrent_transactions = graphene.Int()
+        max_inbound_transactions = graphene.Int()
+        max_outbound_transactions = graphene.Int()
         carrier_tags = graphene.List(graphene.String)
         carrier_tags_override = graphene.List(graphene.String)
         pricelist_tags = graphene.List(graphene.String)
@@ -221,6 +227,8 @@ class upsertAccount(graphene.Mutation):
         active: bool = None,
         balance: int = None,
         max_concurrent_transactions: int = None,
+        max_inbound_transactions: int = None,
+        max_outbound_transactions: int = None,
         carrier_tags: list = None,
         carrier_tags_override: list = None,
         pricelist_tags: list = None,
@@ -244,6 +252,8 @@ class upsertAccount(graphene.Mutation):
                 active=active,
                 balance=balance,
                 max_concurrent_transactions=max_concurrent_transactions,
+                max_inbound_transactions=max_inbound_transactions,
+                max_outbound_transactions=max_outbound_transactions,
                 carrier_tags=carrier_tags,
                 carrier_tags_override=carrier_tags_override,
                 pricelist_tags=pricelist_tags,
