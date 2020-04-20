@@ -60,6 +60,8 @@ async def serialize(storage: StorageService, account: dict) -> dict:
         if account.get("active") is not None
         else None,
         "max_concurrent_transactions": account.get("max_concurrent_transactions"),
+        "max_inbound_transactions": account.get("max_inbound_transactions"),
+        "max_outbound_transactions": account.get("max_outbound_transactions"),
         "running_transactions": account.get("running_transactions") or (),
         "carrier_tags": account.get("carrier_tags"),
         "carrier_tags_override": account.get("carrier_tags_override"),
@@ -194,6 +196,8 @@ async def get_accounts(
                 "max_concurrent_transactions": result.get(
                     "max_concurrent_transactions"
                 ),
+                "max_inbound_transactions": result.get("max_inbound_transactions"),
+                "max_outbound_transactions": result.get("max_outbound_transactions"),
                 "running_transactions": result.get("running_transactions") or (),
                 "carrier_tags": result.get("carrier_tags"),
                 "carrier_tags_override": result.get("carrier_tags_override"),
@@ -266,6 +270,10 @@ async def upsert(storage: StorageService, account: dict) -> Optional[dict]:
                     "balance": account.get("balance"),
                     "max_concurrent_transactions": account.get(
                         "max_concurrent_transactions"
+                    ),
+                    "max_inbound_transactions": account.get("max_inbound_transactions"),
+                    "max_outbound_transactions": account.get(
+                        "max_outbound_transactions"
                     ),
                     "carrier_tags": account.get("carrier_tags"),
                     "carrier_tags_override": account.get("carrier_tags_override"),
