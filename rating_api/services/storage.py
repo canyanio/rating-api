@@ -74,6 +74,10 @@ class StorageService(object):
             unique=True,
         )
 
+    async def connect_and_create_indexes(self):
+        await self.connect()
+        await self.create_indexes()
+
     async def close(self):
         self.client.close()
 
@@ -91,7 +95,7 @@ def setup(app: FastAPI, config: dict) -> FastAPI:
     )
     setattr(app, "storage_service", storage_service)
 
-    app.add_event_handler("startup", storage_service.connect)
+    app.add_event_handler("startup", storage_service.connect_and_create_indexes)
     app.add_event_handler("shutdown", storage_service.close)
 
     @app.middleware("http")
