@@ -52,4 +52,4 @@ uvicorn==0.11.7
 uvloop==0.14.0
 wcwidth==0.1.7
 websockets==8.1
-wrapt==1.11.2
+wrapt==1.12.1
