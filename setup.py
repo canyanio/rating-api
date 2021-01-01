@@ -20,12 +20,12 @@ setup(
     license=license,
     url="https://canyan.io",
     install_requires=[
-        "Click>=7.0",
-        "fastapi>=0.42.0",
+        "Click>=7.1",
+        "fastapi>=0.63",
         "graphene>=2.1.8",
-        "motor>=2.0.0",
+        "motor>=2.3.0",
         "passlib[bcrypt]",
-        "uvicorn>=0.9.1",
+        "uvicorn>=0.13",
     ],
     packages=find_packages(exclude=("tests")),
     classifiers=[
