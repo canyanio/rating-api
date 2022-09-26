@@ -13,7 +13,7 @@ entrypoints==0.3
 fastapi==0.63.0
 flake8==3.8.4
 graphene==2.1.8
-graphql-core==2.3.2
+graphql-core==3.2.3
 graphql-relay==2.0.1
 h11==0.11.0
 httptools==0.1.1
